@@ -1,0 +1,26 @@
+{
+  "name": "MathsCalc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "next": "^10.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "next dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictorAlmeida225/MathsCalc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VictorAlmeida225/MathsCalc/issues"
+  },
+  "homepage": "https://github.com/VictorAlmeida225/MathsCalc#readme"
+}
