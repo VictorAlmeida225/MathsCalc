@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import {Button, Col, Row, Container, Table, Modal, Navbar } from 'react-bootstrap';
+import {Button, Col, Row, Container, Table, Modal, Navbar, Nav } from 'react-bootstrap';
 
 class ToggleButtons extends React.Component {
     state = {
@@ -67,20 +67,25 @@ function App() {
     return (
         <div>
             <Helmet>
-                <title>Teorema de Pitágoras</title>
-                <link rel="shortcut icon" href="https://image.winudf.com/v2/image1/Y29tLmluaXR6ZXJfZGV2LnRlb3JlbWFQaXRhZ29yYXNfaWNvbl8xNTQxMTAxMDU5XzA0Ng/icon.png?w=170&fakeurl=1" type="image/x-icon"/>
+                <title>MathsCalc - Teorema de Pitágoras</title>
+                <link rel="shortcut icon" href="https://i.imgur.com/o1fbby0.png" type="image/x-icon"/>
             </Helmet>
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="../">
                     <img
                         alt="Logo"
-                        src="https://image.winudf.com/v2/image1/Y29tLmluaXR6ZXJfZGV2LnRlb3JlbWFQaXRhZ29yYXNfaWNvbl8xNTQxMTAxMDU5XzA0Ng/icon.png?w=170&fakeurl=1"
+                        src="https://i.imgur.com/o1fbby0.png"
                         width="30"
                         height="30"
                         className="d-inline-block align-top"
                     />{' '}
-                    Teorema de Pitágoras
+                    MathsCalc
                 </Navbar.Brand>
+                <Nav className="ml-auto mr-auto">
+                    <Nav.Link href="../">Home</Nav.Link>
+                    <Nav.Link href="./pitagoras" className="active">T. Pitágoras</Nav.Link>
+                    <Nav.Link href="../bhaskara">Bhaskara</Nav.Link>
+                </Nav>
             </Navbar>
             <Container>
                 <Row className="RowInp">
