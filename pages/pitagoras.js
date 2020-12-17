@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Button, Col, Row, Container, Table, Modal, Navbar } from 'react-bootstrap';
+import {Button, Col, Row, Container, Table, Modal, Navbar } from 'react-bootstrap';
 
 class ToggleButtons extends React.Component {
     state = {
