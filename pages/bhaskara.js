@@ -23,7 +23,7 @@ function App(){
             <Nav className="ml-auto mr-auto">
                 <Nav.Link href="../">Home</Nav.Link>
                 <Nav.Link href="../pitagoras">T. Pitágoras</Nav.Link>
-                    <Nav.Link href="./bhaskara" className="active">Bhaskara</Nav.Link>
+                <Nav.Link href="./bhaskara" className="active">Bhaskara</Nav.Link>
             </Nav>
         </Navbar>
         <Container>

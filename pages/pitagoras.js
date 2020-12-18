@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import {Button, Col, Row, Container, Table, Modal, Navbar, Nav } from 'react-bootstrap';
+import { Button, Col, Row, Container, Table, Modal, Navbar, Nav, InputGroup, FormControl } from 'react-bootstrap';
 
 class ToggleButtons extends React.Component {
     state = {
@@ -90,11 +90,27 @@ function App() {
             <Container>
                 <Row className="RowInp">
                     <Col sm={12} xs={6} md={4}><h3 id="lbl1">Primeiro Cateto:</h3></Col>
-                    <Col sm={12} xs={12} md={8}><input type="number" id="Num1"/></Col>
+                    <Col sm={12} xs={12} md={8}>
+                        <InputGroup className="mb-3">
+                        <InputGroup.Prepend>
+                            <InputGroup.Checkbox id="chkb1"/>
+                            <InputGroup.Text>√</InputGroup.Text>
+                        </InputGroup.Prepend>
+                            <FormControl id="Num1"/>
+                        </InputGroup>
+                    </Col>
                 </Row>
                 <Row className="RowInp">
                     <Col sm={12} xs={6} md={4}><h3 id="lbl2">Segundo Cateto:</h3></Col>
-                    <Col className="SCol" sm ={12} xs={12} md={8}><input type="number" id="Num2"/></Col>
+                    <Col className="SCol" sm={12} xs={12} md={8}>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                                <InputGroup.Checkbox id="chkb2"/>
+                                <InputGroup.Text>√</InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <FormControl id="Num2"/>
+                        </InputGroup>
+                    </Col>
                 </Row>
                 <Row>
                     <Col className="TogCol"><ToggleButtons /></Col>
@@ -156,6 +172,8 @@ function Fatorar(nr) {
 function Calculate() {
     var first = document.getElementById('Num1').value;
     var second = document.getElementById('Num2').value;
+    var chkbone = document.getElementById('chkb1');
+    var chkbtwo = document.getElementById('chkb2');
     if (!first & !second) {
         document.getElementById("Num1").placeholder = "Nenhum número digitado!";
         document.getElementById("Num2").placeholder = "Nenhum número digitado!";
@@ -168,6 +186,12 @@ function Calculate() {
     }
     else {
         if (document.getElementById('Radio').classList.contains('btn-secondary') == true) {
+            if (chkbone.checked){
+                var firstsqrd = true;
+            }
+            if (chkbtwo.checked) {
+                var secondsqrd = true;
+            }
             document.getElementById('Num1').value = '';
             document.getElementById('Num2').value = '';
             document.getElementById('resp8').innerHTML = '';
@@ -247,8 +271,12 @@ function Calculate() {
                     }
                 }
 
-                var foradaraiz = multiplicatodooarray(numeroantes)
-                var dentrodaraiz = multiplicatodooarray(numerodepois)
+                if (!numeroantes) {
+                    var foradaraiz = multiplicatodooarray(numeroantes)
+                }
+                if (!numerodepois) {
+                    var dentrodaraiz = multiplicatodooarray(numerodepois)
+                }
 
                 document.getElementById('resp6').innerHTML = 'C = ' + foradaraiz + '√' + dentrodaraiz;
 
@@ -354,9 +382,12 @@ function Calculate() {
                         numeroantes.push(total = Math.pow(numerorepitidos[y][0], (conferidor / 2)));
                     }
                 }
-
-                var foradaraiz = multiplicatodooarray(numeroantes)
-                var dentrodaraiz = multiplicatodooarray(numerodepois)
+                if (!numeroantes){
+                    var foradaraiz = multiplicatodooarray(numeroantes)
+                }
+                if (!numerodepois) {
+                    var dentrodaraiz = multiplicatodooarray(numerodepois)
+                }
 
                 document.getElementById('resp7').innerHTML = 'C = ' + foradaraiz + '√' + dentrodaraiz;
 
