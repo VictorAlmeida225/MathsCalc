@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Button, Col, Row, Container, Table, Modal, Navbar, Nav, InputGroup, FormControl } from 'react-bootstrap';
+import { OverlayTrigger, Button, Col, Row, Container, Table, Modal, Navbar, Nav, InputGroup, FormControl, Image, Tooltip } from 'react-bootstrap';
 
 class ToggleButtons extends React.Component {
     state = {
@@ -70,7 +70,7 @@ function App() {
                 <title>MathsCalc - Teorema de Pitágoras</title>
                 <link rel="shortcut icon" href="https://i.imgur.com/o1fbby0.png" type="image/x-icon"/>
             </Helmet>
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
                 <Navbar.Brand href="../">
                     <img
                         alt="Logo"
@@ -81,21 +81,28 @@ function App() {
                     />{' '}
                     MathsCalc
                 </Navbar.Brand>
-                <Nav className="ml-auto mr-auto">
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="ml-auto">
                     <Nav.Link href="../">Home</Nav.Link>
-                    <Nav.Link href="./pitagoras" className="active">T. Pitágoras</Nav.Link>
+                    <Nav.Link href="./pitagoras" className="active">Teorema de Pitágoras</Nav.Link>
+                    <Nav.Link href="../bhaskara">Bhaskara</Nav.Link>
+                    <Nav.Link href="../bhaskara">Bhaskara</Nav.Link>
                     <Nav.Link href="../bhaskara">Bhaskara</Nav.Link>
                 </Nav>
+                </Navbar.Collapse>
             </Navbar>
             <Container>
                 <Row className="RowInp">
                     <Col sm={12} xs={6} md={4}><h3 id="lbl1">Primeiro Cateto:</h3></Col>
                     <Col sm={12} xs={12} md={8}>
                         <InputGroup className="mb-3">
-                        <InputGroup.Prepend>
-                            <InputGroup.Checkbox id="chkb1"/>
-                            <InputGroup.Text>√</InputGroup.Text>
-                        </InputGroup.Prepend>
+                            <InputGroup.Prepend>
+                                <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">Ao selecionar, o número digitado será posto como raiz!</Tooltip>}>
+                                    <InputGroup.Checkbox id="chkb1"/>
+                                </OverlayTrigger>
+                                <InputGroup.Text>√</InputGroup.Text>
+                            </InputGroup.Prepend>
                             <FormControl id="Num1"/>
                         </InputGroup>
                     </Col>
@@ -105,7 +112,9 @@ function App() {
                     <Col className="SCol" sm={12} xs={12} md={8}>
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
-                                <InputGroup.Checkbox id="chkb2"/>
+                                <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">Ao selecionar, o número digitado será posto como raiz!</Tooltip>}>
+                                    <InputGroup.Checkbox id="chkb2"/>
+                                </OverlayTrigger>
                                 <InputGroup.Text>√</InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl id="Num2"/>
@@ -165,7 +174,7 @@ function Fatorar(nr) {
             break;
         }
     }
-    partes.push([1, '']);
+    partes.push([1, '/']);
     return partes;
 }
 
@@ -187,30 +196,51 @@ function Calculate() {
     else {
         if (document.getElementById('Radio').classList.contains('btn-secondary') == true) {
             if (chkbone.checked){
+                var firstsqrd = false;
+            } else {
                 var firstsqrd = true;
             }
             if (chkbtwo.checked) {
+                var secondsqrd = false;
+            } else {
                 var secondsqrd = true;
             }
             document.getElementById('Num1').value = '';
             document.getElementById('Num2').value = '';
             document.getElementById('resp8').innerHTML = '';
 
-            // $('#resposta-container').append('<h4>A<sup>2</sup> = B<sup>2</sup> + C<sup>2</sup></h4>');
             document.getElementById('resp1').innerHTML = 'A<sup>2</sup> = B<sup>2</sup> + C<sup>2</sup>';
 
-            // $('#resposta-container').append('<h4>A<sup>2</sup> = ' + first + '<sup>2</sup> + ' + second + '<sup>2</sup></h4>');
-            document.getElementById('resp2').innerHTML = 'A<sup>2</sup> = ' + first + '<sup>2</sup> + ' + second + '<sup>2</sup>';
+            if (firstsqrd == true) {
+                var FS = '<sup>2</sup>';
+            } else {
+                var FS = '';
+            }
+            if (secondsqrd == true) {
+                var SS = '<sup>2</sup>';
+            } else {
+                var SS = '';
+            } 
 
-            // $('#resposta-container').append('<h4>A<sup>2</sup> = ' + fsqr + ' + ' + ssqr + '</h4>');
-            document.getElementById('resp3').innerHTML = 'A<sup>2</sup> = ' + Math.pow(first, 2) + ' + ' + Math.pow(second, 2);
+            document.getElementById('resp2').innerHTML = 'A<sup>2</sup> = ' + first + FS + ' + ' + second + SS;
 
-            var soma = parseInt(Math.pow(first, 2)) + parseInt(Math.pow(second, 2))
+            if (firstsqrd == true){
+                var None = Math.pow(first, 2);
+            } else {
+                var None = first;
+            }
+            if (secondsqrd == true) {
+                var Ntwo = Math.pow(second, 2);
+            } else {
+                var Ntwo = second;
+            }
 
-            // $('#resposta-container').append('<h4>A<sup>2</sup> = ' + soma + '</h4>');
+            document.getElementById('resp3').innerHTML = 'A<sup>2</sup> = ' + None + ' + ' + Ntwo;
+
+            var soma = parseInt(None) + parseInt(Ntwo)
+
             document.getElementById('resp4').innerHTML = 'A<sup>2</sup> = ' + soma;
 
-            // $('#resposta-container').append('<h4>A = √' + soma + '</h4>');
             document.getElementById('resp5').innerHTML = 'A = √' + soma;
 
             if (Math.sqrt(soma) % 1 !== 0) {
@@ -271,19 +301,19 @@ function Calculate() {
                     }
                 }
 
-                if (!numeroantes) {
-                    var foradaraiz = multiplicatodooarray(numeroantes)
-                }
-                if (!numerodepois) {
-                    var dentrodaraiz = multiplicatodooarray(numerodepois)
+                var foradaraiz = multiplicatodooarray(numeroantes)
+                var dentrodaraiz = multiplicatodooarray(numerodepois)
+                
+                if (foradaraiz == 1){
+                    var foradaraiz = '';
                 }
 
-                document.getElementById('resp6').innerHTML = 'C = ' + foradaraiz + '√' + dentrodaraiz;
+                document.getElementById('resp6').innerHTML = 'A = ' + foradaraiz + '√' + dentrodaraiz;
 
                 var n = Math.sqrt(soma);
                 var numeroDefinitivo = formatarValor(n);
 
-                document.getElementById('resp7').innerHTML = 'A Hipotenusa é igual a ' + foradaraiz + '√' + dentrodaraiz + ' ou ' + numeroDefinitivo;
+                document.getElementById('resp7').innerHTML = 'A hipotenusa é igual a ' + foradaraiz + '√' + dentrodaraiz + ' ou ' + numeroDefinitivo;
             }
             else{
                 var columnresp = document.getElementById('Col-resp');
@@ -298,31 +328,61 @@ function Calculate() {
 
                 document.getElementById('resp6').innerHTML = 'A = ' + Math.sqrt(soma);
 
-                document.getElementById('resp7').innerHTML = 'A Hipotenusa é igual a ' + Math.sqrt(soma);
+                document.getElementById('resp7').innerHTML = 'A hipotenusa é igual a ' + Math.sqrt(soma);
             }
         }
         else {
+            if (chkbone.checked) {
+                var firstsqrd = false;
+            } else {
+                var firstsqrd = true;
+            }
+            if (chkbtwo.checked) {
+                var secondsqrd = false;
+            } else {
+                var secondsqrd = true;
+            }
             document.getElementById('Num1').value = '';
             document.getElementById('Num2').value = '';
             
-            // $('#resposta-container').append('<h4>A<sup>2</sup> = B<sup>2</sup> + C<sup>2</sup></h4>');
             document.getElementById('resp1').innerHTML = 'A<sup>2</sup> = B<sup>2</sup> + C<sup>2</sup>';
 
-            // $('#resposta-container').append('<h4>' + first + '<sup>2</sup> = ' + second + '<sup>2</sup>' + '+ C<sup>2</sup></h4>');
-            document.getElementById('resp2').innerHTML = first + '<sup>2</sup> = ' + second + '<sup>2</sup> + ' + 'C<sup>2</sup>';
+            if (firstsqrd == true) {
+                var FS = '<sup>2</sup>';
+            } else {
+                var FS = '';
+            }
+            if (secondsqrd == true) {
+                var SS = '<sup>2</sup>';
+            } else {
+                var SS = '';
+            } 
 
-            // $('#resposta-container').append('<h4>' + fsqr + ' = ' + ssqr + ' + C<sup>2</sup></h4>');
-            document.getElementById('resp3').innerHTML = 'C<sup>2</sup> = ' + first + '<sup>2</sup> - ' + second + '<sup>2</sup>';
+            document.getElementById('resp2').innerHTML = first + FS + ' = ' + second + SS + ' + ' + 'C<sup>2</sup>';
 
-            // $('#resposta-container').append('<h4>C<sup>2</sup> = ' + fsqr + ' - ' + ssqr + '</h4>');
-            document.getElementById('resp4').innerHTML = 'C<sup>2</sup> = ' + Math.pow(first, 2) + ' - ' + Math.pow(second, 2);
+            document.getElementById('resp3').innerHTML = 'C<sup>2</sup> = ' + first + FS + ' - ' + second + SS;
 
-            var subtração = parseInt(Math.pow(first, 2)) - parseInt(Math.pow(second, 2));
+            if (firstsqrd == true) {
+                var None = Math.pow(first, 2);
+            } else {
+                var None = first;
+            }
+            if (secondsqrd == true) {
+                var Ntwo = Math.pow(second, 2);
+            } else {
+                var Ntwo = second;
+            }
 
-            // $('#resposta-container').append('<h4>C<sup>2</sup> = ' + subtração + '</h4>');
+            if (firstsqrd == false & secondsqrd == false) {
+                document.getElementById('resp4').innerHTML = '';
+            } else {
+                document.getElementById('resp4').innerHTML = 'C<sup>2</sup> = ' + None + ' - ' + Ntwo;
+            }
+
+            var subtração = parseInt(None) - parseInt(Ntwo);
+
             document.getElementById('resp5').innerHTML = 'C<sup>2</sup> = ' + subtração;
 
-            // $('#resposta-container').append('<h4>A = √' + subtração + '</h4>');
             document.getElementById('resp6').innerHTML = 'C = √' + subtração;
 
             if (Math.sqrt(subtração) % 1 !== 0) {
@@ -382,11 +442,11 @@ function Calculate() {
                         numeroantes.push(total = Math.pow(numerorepitidos[y][0], (conferidor / 2)));
                     }
                 }
-                if (!numeroantes){
-                    var foradaraiz = multiplicatodooarray(numeroantes)
-                }
-                if (!numerodepois) {
-                    var dentrodaraiz = multiplicatodooarray(numerodepois)
+
+                var foradaraiz = multiplicatodooarray(numeroantes)
+                var dentrodaraiz = multiplicatodooarray(numerodepois)
+                if (foradaraiz == 1) {
+                    var foradaraiz = '';
                 }
 
                 document.getElementById('resp7').innerHTML = 'C = ' + foradaraiz + '√' + dentrodaraiz;
@@ -394,7 +454,7 @@ function Calculate() {
                 var n = Math.sqrt(subtração);
                 var numeroDefinitivo = formatarValor(n);
 
-                document.getElementById('resp8').innerHTML = 'O outro Cateto é igual a ' + foradaraiz + '√' + dentrodaraiz + ' ou ' + numeroDefinitivo;
+                document.getElementById('resp8').innerHTML = 'O outro cateto é igual a ' + foradaraiz + '√' + dentrodaraiz + ' ou ' + numeroDefinitivo;
             }
             else {
                 var columnresp = document.getElementById('Col-resp');
@@ -410,13 +470,19 @@ function Calculate() {
                 // $('#resposta-container').append('<h3> A = ' + c + '</h3>');
                 document.getElementById('resp7').innerHTML = 'C = ' + Math.sqrt(subtração);
 
-                document.getElementById('resp8').innerHTML = 'O outro Cateto é igual a ' + Math.sqrt(subtração);
+                document.getElementById('resp8').innerHTML = 'O outro cateto é igual a ' + Math.sqrt(subtração);
             }
         }
     }
 }
 
-const multiplicatodooarray = (itens) => itens.reduce((acumulador, item) => acumulador * item);
+function multiplicatodooarray(v) {
+    var res = 1;
+    for (var i = 0; i < v.length; i++) {
+        res *= v[i];
+    }
+    return res;
+}
 
 function formatarValor(valor) {
     return valor.toLocaleString('pt-BR', { minimumFractionDigits: 3 });

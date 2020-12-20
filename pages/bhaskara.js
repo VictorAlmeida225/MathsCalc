@@ -20,9 +20,9 @@ function App(){
                 />{' '}
                 MathsCalc
             </Navbar.Brand>
-            <Nav className="ml-auto mr-auto">
+            <Nav className="ml-auto">
                 <Nav.Link href="../">Home</Nav.Link>
-                <Nav.Link href="../pitagoras">T. Pitágoras</Nav.Link>
+                <Nav.Link href="../pitagoras">Teorema de Pitágoras</Nav.Link>
                 <Nav.Link href="./bhaskara" className="active">Bhaskara</Nav.Link>
             </Nav>
         </Navbar>
