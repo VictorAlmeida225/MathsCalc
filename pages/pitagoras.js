@@ -87,8 +87,6 @@ function App() {
                     <Nav.Link href="../">Home</Nav.Link>
                     <Nav.Link href="./pitagoras" className="active">Teorema de Pitágoras</Nav.Link>
                     <Nav.Link href="../bhaskara">Bhaskara</Nav.Link>
-                    <Nav.Link href="../bhaskara">Bhaskara</Nav.Link>
-                    <Nav.Link href="../bhaskara">Bhaskara</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Navbar>

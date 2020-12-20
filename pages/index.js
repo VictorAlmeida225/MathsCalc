@@ -9,7 +9,7 @@ function App(){
                 <title>MathsCalc</title>
                 <link rel="shortcut icon" href="https://i.imgur.com/o1fbby0.png" type="image/x-icon" />
             </Helmet>
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
                 <Navbar.Brand href="#">
                     <img
                         alt="Logo"
@@ -20,11 +20,14 @@ function App(){
                     />{' '}
                     MathsCalc
                 </Navbar.Brand>
-                <Nav className="ml-auto">
-                    <Nav.Link href="#" className="active">Home</Nav.Link>
-                    <Nav.Link href="./pitagoras">Teorema de Pitágoras</Nav.Link>
-                    <Nav.Link href="./bhaskara">Bhaskara</Nav.Link>
-                </Nav>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="ml-auto">
+                        <Nav.Link href="#" className="active">Home</Nav.Link>
+                        <Nav.Link href="./pitagoras">Teorema de Pitágoras</Nav.Link>
+                        <Nav.Link href="./bhaskara">Bhaskara</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
         </div>
     )
