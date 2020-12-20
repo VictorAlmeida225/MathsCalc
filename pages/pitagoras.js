@@ -92,8 +92,8 @@ function App() {
             </Navbar>
             <Container>
                 <Row className="RowInp">
-                    <Col><h3 id="lbl1">Primeiro Cateto:</h3></Col>
-                    <Col>
+                    <Col sm={12}><h3 id="lbl1">Primeiro Cateto:</h3></Col>
+                    <Col sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
                                 <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">Ao selecionar, o número digitado será posto como raiz!</Tooltip>}>
@@ -106,8 +106,8 @@ function App() {
                     </Col>
                 </Row>
                 <Row className="RowInp">
-                    <Col><h3 id="lbl2">Segundo Cateto:</h3></Col>
-                    <Col className="SCol">
+                    <Col sm={12}><h3 id="lbl2">Segundo Cateto:</h3></Col>
+                    <Col sm={12} className="SCol">
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
                                 <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">Ao selecionar, o número digitado será posto como raiz!</Tooltip>}>
