@@ -120,8 +120,8 @@ function App() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col className="TogCol"><ToggleButtons /></Col>
-                    <Col className="SubCol"><ButtonSubmit /></Col>
+                    <Col sm={8} className="TogCol"><ToggleButtons /></Col>
+                    <Col sm={4} className="SubCol"><ButtonSubmit /></Col>
                 </Row>
                 <Row>
                     <Col><Respostas /></Col>
