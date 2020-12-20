@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { OverlayTrigger, Button, Col, Row, Container, Table, Modal, Navbar, Nav, InputGroup, FormControl, Image, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, Button, Col, Row, Container, Table, Modal, Navbar, Nav, InputGroup, FormControl, Form, Image, Tooltip } from 'react-bootstrap';
 
 class ToggleButtons extends React.Component {
     state = {
@@ -101,7 +101,7 @@ function App() {
                                 </OverlayTrigger>
                                 <InputGroup.Text>√</InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControl id="Num1"/>
+                            <Form.Control type="number" id="Num1"/>
                         </InputGroup>
                     </Col>
                 </Row>
@@ -115,7 +115,7 @@ function App() {
                                 </OverlayTrigger>
                                 <InputGroup.Text>√</InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControl id="Num2"/>
+                            <Form.Control type="number" id="Num2"/>
                         </InputGroup>
                     </Col>
                 </Row>
