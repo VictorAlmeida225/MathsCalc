@@ -20,7 +20,7 @@ input[type=number]{
     margin: 25px auto 25px auto !important;
 }
 .RowInp{
-    border-bottom: 1px dotted #555555;
+    border-bottom: 1px solid #555555;
 }
 div .row:nth-child(2){
     margin-top: 15px;

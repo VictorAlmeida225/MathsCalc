@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Helmet from 'react-helmet';
-import { OverlayTrigger, Button, Col, Row, Container, Table, Modal, Navbar, Nav, InputGroup, FormControl, Form, Image, Tooltip } from 'react-bootstrap';
+import { Alert, OverlayTrigger, Button, Col, Row, Container, Modal, Navbar, Nav, InputGroup, Form, Image, Tooltip } from 'react-bootstrap';
+import Link from 'next/link';
 
 class ToggleButtons extends React.Component {
     state = {
@@ -10,17 +11,17 @@ class ToggleButtons extends React.Component {
     render() {
         return (
             <div>
-                <Button 
+                <Button
                     className="buttonbtn"
                     variant={this.state.FirstActive ? "secondary" : "outline-secondary"}
                     onClick={() => this.setState({ FirstActive: true }) & this.setState({ SecondActive: false }) & MudarLabelHyp()}
                     id="Radio">
-                Hipotenusa</Button>
-                <Button 
+                    Hipotenusa</Button>
+                <Button
                     className="buttonbtn"
                     variant={this.state.SecondActive ? "secondary" : "outline-secondary"}
                     onClick={() => this.setState({ FirstActive: false }) & this.setState({ SecondActive: true }) & MudarLabelCat()}>
-                Cateto</Button>
+                    Cateto</Button>
             </div>
         );
     }
@@ -34,13 +35,13 @@ class ButtonSubmit extends React.Component {
     render() {
         return (
             <div>
-                <Button 
+                <Button
                     className="buttonbtn"
                     variant={this.state.Hovered ? "primary" : "outline-primary"}
                     onMouseEnter={() => this.setState({ Hovered: true })}
                     onMouseLeave={() => this.setState({ Hovered: false })}
                     onClick={Calculate}>
-                Calcular</Button>
+                    Calcular</Button>
             </div>
         )
     }
@@ -59,63 +60,70 @@ function Respostas() {
             <h4 id="resp8"></h4>
             <h4 id="resp9"></h4>
             <h4 id="resp10"></h4>
-        </div>
+        </div >
     )
 }
 
 function App() {
+    const [modal1Show, setModal1Show] = useState(false);
+    const [modal2Show, setModal2Show] = useState(false);
+
     return (
         <div>
             <Helmet>
                 <title>MathsCalc - Teorema de Pitágoras</title>
-                <link rel="shortcut icon" href="https://i.imgur.com/o1fbby0.png" type="image/x-icon"/>
+                <link rel="shortcut icon" href="https://i.imgur.com/o1fbby0.png" type="image/x-icon" />
             </Helmet>
             <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
-                <Navbar.Brand href="../">
-                    <img
-                        alt="Logo"
-                        src="https://i.imgur.com/o1fbby0.png"
-                        width="30"
-                        height="30"
-                        className="d-inline-block align-top"
-                    />{' '}
+                <Link href="../">
+                    <Navbar.Brand className="unselective">
+                        <img
+                            alt="Logo"
+                            src="https://i.imgur.com/o1fbby0.png"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                        />{' '}
                     MathsCalc
-                </Navbar.Brand>
+                    </Navbar.Brand>
+                </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="ml-auto">
-                    <Nav.Link href="../">Home</Nav.Link>
-                    <Nav.Link href="./pitagoras" className="active">Teorema de Pitágoras</Nav.Link>
-                    <Nav.Link href="../bhaskara">Bhaskara</Nav.Link>
-                </Nav>
+                    <Nav className="ml-auto">
+                        <Link href="../"><Nav.Link className="unselective">Home</Nav.Link></Link>
+                        <Link href="./"><Nav.Link className="unselective">Teorema de Pitágoras</Nav.Link></Link>
+                        <Link href="../bhaskara"><Nav.Link className="active unselective">Bhaskara</Nav.Link></Link>
+                    </Nav>
                 </Navbar.Collapse>
             </Navbar>
             <Container>
                 <Row className="RowInp">
-                    <Col xs={12} sm={3}><h3 id="lbl1">Primeiro Cateto:</h3></Col>
-                    <Col xs={12} sm={9}>
+                    <Col md={12} xl={3}><h3 id="lbl1" className="unselective">Primeiro Cateto:</h3></Col>
+                    <Col md={12} xl={9}>
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
+                                <Button variant="outline-secondary" onClick={() => setModal1Show(true)}>Fração?</Button>
+                                <InputGroup.Text className="unselective">√</InputGroup.Text>
                                 <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">Ao selecionar, o número digitado será posto como raiz!</Tooltip>}>
-                                    <InputGroup.Checkbox id="chkb1"/>
+                                    <InputGroup.Checkbox id="chkb1" />
                                 </OverlayTrigger>
-                                <InputGroup.Text>√</InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control type="number" id="Num1"/>
+                            <Form.Control type="number" id="Num1" />
                         </InputGroup>
                     </Col>
                 </Row>
                 <Row className="RowInp">
-                    <Col xs={12} sm={3}><h3 id="lbl2">Segundo Cateto:</h3></Col>
-                    <Col xs={12} sm={9} className="SCol">
+                    <Col md={12} xl={3}><h3 id="lbl2" className="unselective">Segundo Cateto:</h3></Col>
+                    <Col md={12} xl={9} className="SCol">
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
+                                <Button variant="outline-secondary" onClick={() => setModal2Show(true)}>Fração?</Button>
+                                <InputGroup.Text className="unselective">√</InputGroup.Text>
                                 <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">Ao selecionar, o número digitado será posto como raiz!</Tooltip>}>
-                                    <InputGroup.Checkbox id="chkb2"/>
+                                    <InputGroup.Checkbox id="chkb2" />
                                 </OverlayTrigger>
-                                <InputGroup.Text>√</InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control type="number" id="Num2"/>
+                            <Form.Control type="number" id="Num2" />
                         </InputGroup>
                     </Col>
                 </Row>
@@ -124,21 +132,117 @@ function App() {
                     <Col xs={4} className="SubCol"><ButtonSubmit /></Col>
                 </Row>
                 <Row>
-                    <Col><Respostas /></Col>
-                    <Col id="Col-resp"></Col>
+                    <Col xs={12} sm={12} lg={6}><Respostas /></Col>
+                    <Col xs={12} sm={12} lg={6} id="Col-resp"></Col>
                 </Row>
+                <ModalFracao1 show={modal1Show} onHide={() => setModal1Show(false)} />
+                <ModalFracao2 show={modal2Show} onHide={() => setModal2Show(false)} />
             </Container>
         </div>
     )
 }
 
+function ModalFracao1(props) {
+    return (
+        <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Fração para decimais...
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="show-grid">
+                <Container>
+                    <Row>
+                        <Col xs={6} md={6}>
+                            <h4 className="unselective">Numerador:</h4>
+                        </Col>
+                        <Col xs={6} md={6}>
+                            <Form.Control type="number" id="Nume1" />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col xs={6} md={6}>
+                            <h4 className="unselective">Denominador:</h4>
+                        </Col>
+                        <Col xs={6} md={6}>
+                            <Form.Control type="number" id="Deno1" />
+                        </Col>
+                    </Row>
+                </Container>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={props.onHide}>Fechar</Button>
+                <Button onClick={ftod1}>Salvar</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+}
+
+function ftod1() {
+    var numerador = document.getElementById('Nume1').value;
+    var denominador = document.getElementById('Deno1').value;
+
+    var decimal = numerador/denominador;
+    
+    document.getElementById('Num1').value = decimal;
+
+}
+function ModalFracao2(props) {
+    return (
+        <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Fração para decimais...
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="show-grid">
+                <Container>
+                    <Row>
+                        <Col xs={6} md={6}>
+                            <h4 className="unselective">Numerador:</h4>
+                        </Col>
+                        <Col xs={6} md={6}>
+                            <Form.Control type="number" id="Nume2" />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col xs={6} md={6}>
+                            <h4 className="unselective">Denominador:</h4>
+                        </Col>
+                        <Col xs={6} md={6}>
+                            <Form.Control type="number" id="Deno2" />
+                        </Col>
+                    </Row>
+                </Container>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={props.onHide}>Fechar</Button>
+                <Button onClick={ftod2}>Salvar</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+}
+
+function ftod2() {
+    var numerador = document.getElementById('Nume2').value;
+    var denominador = document.getElementById('Deno2').value;
+
+    var decimal = numerador/denominador;
+    
+    document.getElementById('Num2').value = decimal;
+
+    () => setModal2Show(false)
+
+}
 
 function MudarLabelHyp() {
     document.getElementById('lbl1').innerHTML = 'Primeiro Cateto:';
     document.getElementById('lbl2').innerHTML = 'Segundo Cateto:';
 }
 
-function MudarLabelCat(){
+function MudarLabelCat() {
     document.getElementById('lbl1').innerHTML = 'Hipotenusa:';
     document.getElementById('lbl2').innerHTML = 'Cateto:';
 }
@@ -193,7 +297,7 @@ function Calculate() {
     }
     else {
         if (document.getElementById('Radio').classList.contains('btn-secondary') == true) {
-            if (chkbone.checked){
+            if (chkbone.checked) {
                 var firstsqrd = false;
             } else {
                 var firstsqrd = true;
@@ -218,11 +322,11 @@ function Calculate() {
                 var SS = '<sup>2</sup>';
             } else {
                 var SS = '';
-            } 
+            }
 
             document.getElementById('resp2').innerHTML = 'A<sup>2</sup> = ' + first + FS + ' + ' + second + SS;
 
-            if (firstsqrd == true){
+            if (firstsqrd == true) {
                 var None = Math.pow(first, 2);
             } else {
                 var None = first;
@@ -301,8 +405,8 @@ function Calculate() {
 
                 var foradaraiz = multiplicatodooarray(numeroantes)
                 var dentrodaraiz = multiplicatodooarray(numerodepois)
-                
-                if (foradaraiz == 1){
+
+                if (foradaraiz == 1) {
                     var foradaraiz = '';
                 }
 
@@ -313,7 +417,7 @@ function Calculate() {
 
                 document.getElementById('resp7').innerHTML = 'A hipotenusa é igual a ' + foradaraiz + '√' + dentrodaraiz + ' ou ' + numeroDefinitivo;
             }
-            else{
+            else {
                 var columnresp = document.getElementById('Col-resp');
                 if (columnresp.hasChildNodes()) {
                     var elemento = document.getElementById('Col-resp');
@@ -342,7 +446,7 @@ function Calculate() {
             }
             document.getElementById('Num1').value = '';
             document.getElementById('Num2').value = '';
-            
+
             document.getElementById('resp1').innerHTML = 'A<sup>2</sup> = B<sup>2</sup> + C<sup>2</sup>';
 
             if (firstsqrd == true) {
@@ -354,7 +458,7 @@ function Calculate() {
                 var SS = '<sup>2</sup>';
             } else {
                 var SS = '';
-            } 
+            }
 
             document.getElementById('resp2').innerHTML = first + FS + ' = ' + second + SS + ' + ' + 'C<sup>2</sup>';
 
@@ -385,7 +489,7 @@ function Calculate() {
 
             if (Math.sqrt(subtração) % 1 !== 0) {
                 var columnresp = document.getElementById('Col-resp');
-                if (columnresp.hasChildNodes()){
+                if (columnresp.hasChildNodes()) {
                     var elemento = document.getElementById('Col-resp');
                     while (elemento.firstChild) {
                         elemento.removeChild(elemento.firstChild);
@@ -402,7 +506,7 @@ function Calculate() {
                 var NDArray = [...NúmerosDiferentes];
                 var NDArrayCut = NDArray.pop();
                 var numerosprimosCut = numerosprimos.pop();
-                
+
 
                 var total = 0;
                 var inutil = 0;
@@ -411,15 +515,15 @@ function Calculate() {
                 var numeroantes = [];
                 var numerodepois = [];
 
-                for (var x = 0; x < NDArray.length; x++){
-                    for (var z = 0; z < numerosprimos.length; z++){
+                for (var x = 0; x < NDArray.length; x++) {
+                    for (var z = 0; z < numerosprimos.length; z++) {
                         var test = numerosprimos[z]
-                        var test2 = numerosprimos[z-1] 
+                        var test2 = numerosprimos[z - 1]
                         if (test == NDArray[x] & test == test2) {
                             inutil++
                             inutil2 = NDArray[x]
                         }
-                        else if (test == NDArray[x]){
+                        else if (test == NDArray[x]) {
                             inutil = 1
                             inutil2 = NDArray[x]
                         }
@@ -435,7 +539,7 @@ function Calculate() {
                     else if (conferidor & 1) {
                         numerodepois.push(numerorepitidos[y][0]);
                         numeroantes.push(total = Math.pow(numerorepitidos[y][0], ((conferidor - 1) / 2)));
-                    } 
+                    }
                     else {
                         numeroantes.push(total = Math.pow(numerorepitidos[y][0], (conferidor / 2)));
                     }
