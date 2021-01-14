@@ -26,9 +26,9 @@ function App(){
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
-                        <Link href="./"><Nav.Link className="unselective">Home</Nav.Link></Link>
+                        <Link href="./"><Nav.Link className="active unselective">Home</Nav.Link></Link>
                         <Link href="./pitagoras"><Nav.Link className="unselective">Teorema de Pitágoras</Nav.Link></Link>
-                        <Link href="./bhaskara"><Nav.Link className="active unselective">Bhaskara</Nav.Link></Link>
+                        <Link href="./bhaskara"><Nav.Link className="unselective">Bhaskara</Nav.Link></Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
